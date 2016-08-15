@@ -4,16 +4,17 @@ using System.Collections;
 public class Manager_Chess : MonoBehaviour
 {
 	//Arrays for easy *poof* of objects and reference
-	public GameObject[] Board;
-	public GameObject[] Pieces_White;
-	public GameObject[] Pieces_Black;
+	private GameObject[] Board;
+	private GameObject[] Pieces_White;
+	private GameObject[] Pieces_Black;
 
 	//Board legnth(X) and Width(Y) for board size
-	public int Board_Length;
-	public int Board_Width;
+	private int Board_Length;
+	private int Board_Width;
 
 	//Game Objects for board and board pieces
-	public GameObject Board_Test;
+	public GameObject Board_Whitetile;
+	public GameObject Board_Blacktile;
 
 	void Awake()
 	{
@@ -31,8 +32,7 @@ public class Manager_Chess : MonoBehaviour
 			for (int y = 0; y < Board_Length; y++)
 			{
 				Debug.Log ("Board Length = " + Board_Length + "|| Y = " + y);
-
-				object BoardTest = Instantiate(Board_Test, new Vector3(0f+x, 0f+y, 0f), Quaternion.identity);
+				Chess_Tile (x, y);
 			}
 		}
 	}
@@ -41,5 +41,28 @@ public class Manager_Chess : MonoBehaviour
 	void Update ()
 	{
 	
+	}
+
+	void Chess_Tile (int BoardX, int BoardY)
+	{
+		if(BoardX % 2 == 1 && BoardY % 2 == 0)//Board Odd X
+		{
+			object Tile_White = Instantiate (Board_Whitetile, new Vector3 (0f + BoardX, 0f + BoardY, 0f), Quaternion.identity);
+		}
+
+		if(BoardX % 2 == 0 && BoardY % 2 == 1)//Board Odd X
+		{
+			object Tile_Black = Instantiate (Board_Whitetile, new Vector3 (0f + BoardX, 0f + BoardY, 0f), Quaternion.identity);
+		}
+
+		if (BoardX % 2 == 0 && BoardY % 2 == 1)//Board Even X
+		{
+			object Tile_White = Instantiate (Board_Whitetile, new Vector3 (0f + BoardX, 0f + BoardY, 0f), Quaternion.identity);
+		}
+
+		if(BoardX % 2 == 1 && BoardY % 2 == 0)//Board Odd X
+		{
+			object Tile_Black = Instantiate (Board_Blacktile, new Vector3 (0f + BoardX, 0f + BoardY, 0f), Quaternion.identity);
+		}
 	}
 }
